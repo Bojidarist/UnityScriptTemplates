@@ -1,0 +1,58 @@
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    private bool isOnGround;
+    private float horizontalMovement;
+    private float verticalMovement;
+
+    public float speed = 1f;
+    public float jumpPower = 1f;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        isOnGround = true;
+    }
+
+    private void Start()
+    {
+        #NOTRIM#
+    }
+
+    private void Update()
+    {
+        horizontalMovement = Input.GetAxisRaw("Horizontal") * Time.deltaTime;
+        verticalMovement = Input.GetAxisRaw("Vertical") * Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        transform.position += new Vector3(horizontalMovement * speed, 0, 0);
+        if (isOnGround && Input.GetButtonDown("Jump") && rb.velocity.y < 0.01f)
+        {
+            rb.AddForce(new Vector2(0, jumpPower), ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        isOnGround = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        isOnGround = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+        #NOTRIM#
+    }
+
+    private void OnTriggerExit2D(Collider2D trigger)
+    {
+        #NOTRIM#
+    }
+}

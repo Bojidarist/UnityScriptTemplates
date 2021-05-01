@@ -1,0 +1,53 @@
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    private Rigidbody2D rb;
+    private new BoxCollider2D collider;
+    private Vector2 position;
+
+    public float speed = 1;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        collider = GetComponent<BoxCollider2D>();
+        position = new Vector2();
+    }
+
+    private void Start()
+    {
+	    #NOTRIM#
+    }
+
+    private void Update()
+    {
+        float horizontalMovement = Input.GetAxisRaw("Horizontal") * speed * Time.deltaTime;
+        float verticalMovement = Input.GetAxisRaw("Vertical") * speed * Time.deltaTime;
+
+        position.x += horizontalMovement;
+        position.y += verticalMovement;
+        rb.MovePosition(position);
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+	    #NOTRIM#
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+	    #NOTRIM#
+    }
+
+    private void OnTriggerEnter2D(Collider2D trigger)
+    {
+	    #NOTRIM#
+    }
+
+    private void OnTriggerExit2D(Collider2D trigger)
+    {
+        #NOTRIM#
+    }
+}

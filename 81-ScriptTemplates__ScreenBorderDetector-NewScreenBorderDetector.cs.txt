@@ -1,0 +1,34 @@
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    [SerializeField] private Camera mainCamera = default;
+    [HideInInspector] public float leftBorder;
+    [HideInInspector] public float rightBorder;
+    [HideInInspector] public float upperBorder;
+    [HideInInspector] public float bottomBorder;
+
+    private void Awake()
+    {
+        if (mainCamera == null)
+            return;
+
+        UpdateValues();
+    }
+
+    private void LateUpdate()
+    {
+        UpdateValues();
+    }
+
+    private void UpdateValues()
+    {
+        if (mainCamera == null)
+            return;
+
+        leftBorder = mainCamera.ViewportToWorldPoint(Vector3.zero).x;
+        rightBorder = mainCamera.ViewportToWorldPoint(Vector3.right).x;
+        upperBorder = mainCamera.ViewportToWorldPoint(Vector3.up).y;
+        bottomBorder = mainCamera.ViewportToWorldPoint(Vector3.right).y;
+    }
+}

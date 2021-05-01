@@ -1,0 +1,45 @@
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    public static #SCRIPTNAME# Instance { get; set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+            InitAudioClips();
+        }
+    }
+
+    void Start()
+    {
+        #NOTRIM#
+    }
+
+    void Update()
+    {
+        #NOTRIM#
+    }
+
+    private void InitAudioClips()
+    {
+        #NOTRIM#
+    }
+
+    private void LoadSound(ref AudioSource src, string path, bool isLoop = false, bool playOnAwake = false, bool addComponent = true)
+    {
+        if (addComponent)
+        {
+            src = gameObject.AddComponent<AudioSource>();
+        }
+        src.clip = Resources.Load<AudioClip>(path);
+        src.loop = isLoop;
+        src.playOnAwake = playOnAwake;
+    }
+}
